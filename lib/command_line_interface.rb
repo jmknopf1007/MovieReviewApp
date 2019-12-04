@@ -200,7 +200,7 @@ class CommandLineInterface
         if u_info == '1'
             space_helper(2) 
             puts "Alright let's edit.".yellow
-            #edit_account 
+            edit_account 
         elsif
             u_info == '2'
             space_helper(2) 
@@ -213,8 +213,35 @@ class CommandLineInterface
         end
     end
 
-    # def edit_account
-    # end
+    def edit_account
+        space_helper(2) 
+        puts "Please enter your username.".yellow 
+        space_helper(2) 
+        username_info = gets.chomp
+        space_helper(2) 
+        @find_user = User.find_by(username: username_info) 
+            if @find_user == nil
+                puts "I'm sorry that user doesn't exist.".yellow
+                options 
+            end 
+                if @find_user != nil 
+                    puts "Here is your info- #{@find_user.username}: #{@find_user.age}."
+                    space_helper(2) 
+                    puts "Please enter a new username.".yellow 
+                    space_helper(2) 
+                    new_name = gets.chomp 
+                    space_helper(2) 
+                    puts "Please enter a new age.".yellow 
+                    space_helper(2) 
+                    new_age = gets.chomp 
+                    space_helper(2) 
+                    new_profile = @find_user.update(username: new_name, age: new_age) 
+                    puts "Your new username is: #{@find_user.username}, and your new age is: #{@find_user.age}." 
+                    options 
+                end
+
+    end
+
 
     def delete_account
         space_helper(2) 

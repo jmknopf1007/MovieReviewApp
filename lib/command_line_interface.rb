@@ -20,7 +20,7 @@ class CommandLineInterface
 
     def options
         space_helper(2) 
-        puts "What would you like to do? Please select a number from 1-4.".yellow  
+        puts "What would you like to do? Please select a number from 1-5.".yellow  
         space_helper(2)
         puts "(1) View all movies."
         space_helper(2)
@@ -29,6 +29,8 @@ class CommandLineInterface
         puts "(3) Edit user info."
         space_helper(2)
         puts "(4) Create new user." 
+        space_helper(2)
+        puts "(5) Add a movie to our database." 
         space_helper(2) 
 
         input = gets.chomp
@@ -49,6 +51,10 @@ class CommandLineInterface
             space_helper(2) 
             puts "Yay! Welcome to the family!".yellow
             new_user
+        elsif input == '5'
+            space_helper(2) 
+            puts "Oh yeah what movie you got for us?!".yellow 
+            add_movie 
         else
             space_helper(2) 
             puts "Command not found.".yellow 
@@ -77,6 +83,36 @@ class CommandLineInterface
         end 
     end
 
+    def add_movie
+        space_helper(2)
+        puts "Please enter your username.".yellow 
+        space_helper(2) 
+        username_info = gets.chomp
+        space_helper(2) 
+        @find_user = User.find_by(username: username_info) 
+        if @find_user == nil 
+        puts "I'm sorry that user doesn't exist. Please create a new account.".yellow
+        new_user
+        end 
+            if @find_user != nil 
+                puts "What's the name of the movie you wish to add?".yellow 
+                space_helper(2) 
+                movie_name = gets.chomp
+                space_helper(2) 
+                puts "Please enter a description.".yellow
+                space_helper(2) 
+                movie_description = gets.chomp
+                space_helper(2) 
+                puts "Please enter a genre.".yellow 
+                space_helper(2) 
+                movie_genre = gets.chomp
+                space_helper(2) 
+                puts "Movie added!"
+                Movie.create(title: movie_name, description: movie_description, genre: movie_genre) 
+                options 
+            end
+    end
+
     def new_user
         space_helper(2) 
         puts "Please enter your username."
@@ -96,13 +132,13 @@ class CommandLineInterface
         space_helper(2) 
         username_info = gets.chomp
         space_helper(2) 
-        find_user = User.find_by(username: username_info) 
+        @find_user = User.find_by(username: username_info) 
         #binding.pry 
-        if find_user == nil 
+        if @find_user == nil 
         puts "I'm sorry that user doesn't exist. Please create a new account.".yellow
         new_user
         end 
-            if find_user != nil 
+            if @find_user != nil 
             puts "What movie would you like to rate?".yellow 
             space_helper(2) 
             movie_title = gets.chomp
@@ -129,23 +165,6 @@ class CommandLineInterface
     end
 
 
-    # if find_movie == nil 
-    #     puts "Please enter a description.".yellow
-    #     space_helper(2) 
-    #     movie_description = gets.chomp
-    #     space_helper(2) 
-    #     puts "Please enter a genre.".yellow 
-    #     space_helper(2) 
-    #     movie_genre = gets.chomp
-    #     space_helper(2) 
-    #     puts "Please enter a new rating from 1-10".yellow
-    #     space_helper(2) 
-    #     rating = gets.chomp.to_i 
-    #     space_helper(2) 
-    #     puts "Movie and rating added!".yellow 
-    #     Review.create()
-    #     options 
-    #     end 
 
 
 

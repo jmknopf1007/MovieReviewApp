@@ -1,6 +1,10 @@
 require_relative '../config/environment'
 
+#puts "Let's look at some movies!"  
 
+cli = CommandLineInterface.new
 
-puts "Let's look at some movies!" 
+cli.greet
+
+cli.options 
 

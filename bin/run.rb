@@ -2,4 +2,5 @@ require_relative '../config/environment'
 
 
 
-puts "HELLO WORLD"
+puts "Let's look at some movies!" 
+

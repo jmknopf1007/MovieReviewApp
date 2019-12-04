@@ -20,7 +20,7 @@ class CommandLineInterface
 
     def options
         space_helper(2) 
-        puts "What would you like to do? Please select a number from 1-5.".yellow  
+        puts "What would you like to do? Please select a number from 1-6.".yellow  
         space_helper(2)
         puts "(1) View all movies."
         space_helper(2)
@@ -31,6 +31,8 @@ class CommandLineInterface
         puts "(4) Create new user." 
         space_helper(2)
         puts "(5) Add a movie to our database." 
+        space_helper(2) 
+        puts "(6) Find movie by title."
         space_helper(2) 
 
         input = gets.chomp
@@ -55,6 +57,10 @@ class CommandLineInterface
             space_helper(2) 
             puts "Oh yeah what movie you got for us?!".yellow 
             add_movie 
+        elsif input == '6'
+            space_helper(2) 
+            puts "Let's find that movie quick.".yellow 
+            find_by_title
         else
             space_helper(2) 
             puts "Command not found.".yellow 
@@ -113,6 +119,23 @@ class CommandLineInterface
             end
     end
 
+    def find_by_title
+        space_helper(2) 
+        puts "What's the title of the movie you wish to find?".yellow 
+        space_helper(2) 
+        movie_title = gets.chomp 
+        space_helper(2) 
+        @find_movie = Movie.find_by(title: movie_title)
+                if @find_movie == nil
+                    #space_helper(2)
+                    puts "I'm sorry, that movie isn't in our database.".yellow  
+                    options
+                else
+                    puts "Here's it is! #{@find_movie.title}: #{@find_movie.description}: #{@find_movie.genre}" 
+                    options 
+                end
+    end
+
     def new_user
         space_helper(2) 
         puts "Please enter your username."
@@ -143,14 +166,13 @@ class CommandLineInterface
             space_helper(2) 
             movie_title = gets.chomp
             space_helper(2) 
-            find_movie = Movie.find_by(title: movie_title)
-        #binding.pry 
-                if find_movie == nil
+            @find_movie = Movie.find_by(title: movie_title)
+                if @find_movie == nil
                     puts "I'm sorry, that movie isn't in our database.".yellow 
                     options
                 end
             end
-                    if find_movie != nil
+                    if @find_movie != nil
                         puts "Please enter a rating for this movie.".yellow
                         space_helper(2) 
                         movie_rating = gets.chomp.to_i

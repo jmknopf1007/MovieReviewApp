@@ -26,9 +26,9 @@ class CommandLineInterface
         space_helper(2)
         puts "(2) Rate a movie."
         space_helper(2)
-        puts "(3) Edit user info."
+        puts "(3) Create new user."
         space_helper(2)
-        puts "(4) Create new user." 
+        puts "(4) Edit user info."  
         space_helper(2)
         puts "(5) Add a movie to our database." 
         space_helper(2) 
@@ -47,12 +47,12 @@ class CommandLineInterface
             rate_movie
         elsif input == '3' 
             space_helper(2) 
-            puts "Wanna change that username?".yellow
-            #edit_user_info
-        elsif input == '4'
-            space_helper(2) 
             puts "Yay! Welcome to the family!".yellow
             new_user
+        elsif input == '4'
+            space_helper(2) 
+            puts "Would you like to edit your info, or delete your account?".yellow 
+            edit_user_info
         elsif input == '5'
             space_helper(2) 
             puts "Oh yeah what movie you got for us?!".yellow 
@@ -138,14 +138,16 @@ class CommandLineInterface
 
     def new_user
         space_helper(2) 
-        puts "Please enter your username."
+        puts "Please enter your username.".yellow
         space_helper(2) 
         username = gets.chomp
         space_helper(2) 
-        puts "Please enter your age."
+        puts "Please enter your age.".yellow 
         space_helper(2) 
         age_input = gets.chomp.to_i 
-        u_info = User.create(username: username, age: age_input)
+        space_helper(2) 
+        puts "User created!".yellow 
+        User.create(username: username, age: age_input)
         options   
     end
 
@@ -186,6 +188,73 @@ class CommandLineInterface
 
     end
 
+    def edit_user_info
+        space_helper(2) 
+        puts "(1) Edit user information."
+        space_helper(2) 
+        puts "(2) Delete user account"
+        space_helper(2) 
+
+        u_info = gets.chomp
+
+        if u_info == '1'
+            space_helper(2) 
+            puts "Alright let's edit.".yellow
+            #edit_account 
+        elsif
+            u_info == '2'
+            space_helper(2) 
+            puts "Sorry to see you go.".yellow 
+            delete_account
+        else
+            space_helper(2) 
+            puts "Command not found. Select 1 or 2.".yellow
+            edit_user_info
+        end
+    end
+
+    # def edit_account
+    # end
+
+    def delete_account
+        space_helper(2) 
+        puts "Please enter your username.".yellow 
+        space_helper(2) 
+        username_info = gets.chomp
+        space_helper(2) 
+        @find_user = User.find_by(username: username_info) 
+            if @find_user == nil
+            puts "I'm sorry that user doesn't exist.".yellow
+            options 
+            end 
+                if @find_user != nil 
+        puts "Here is your info- #{@find_user.username}: #{@find_user.age}."
+        space_helper(2) 
+                end    
+                puts "Are you sure you want to leave us?".yellow 
+                    space_helper(2) 
+                    choice = gets.chomp
+                    space_helper(2)
+                    if choice != 'yes' && choice != 'no' 
+                        puts "Command not found, please type yes or no.".yellow 
+                        delete_account 
+                    elsif choice == 'no'
+                        puts "Sounds good! Thanks for staying with us we love you.".yellow 
+                        options
+                    #end
+                    elsif choice == 'yes'
+                         all_reviews = Review.where(user_id: @find_user.id) 
+                    all_reviews.each_with_index do |r, index|
+                        r.destroy
+                    end
+                    @find_user.destroy 
+                end
+                        puts "Your account and ratings have been deleted.".yellow  
+                        options 
+                   
+    end
+
+   
 
 
 

@@ -145,7 +145,7 @@ class CommandLineInterface
         space_helper(2) 
         @find_user = User.find_by(username: username_info.titleize)  
         if @find_user == nil 
-        puts "I'm sorry that user doesn't exist. Please create a new account.".yellow
+        puts "I'm sorry that user doesn't exist. Please create a new account to add a movie.".yellow 
         space_helper(2) 
         options 
         end 
@@ -213,7 +213,7 @@ class CommandLineInterface
         @find_user = User.find_by(username: username_info.titleize)  
         #binding.pry 
         if @find_user == nil 
-        puts "I'm sorry that user doesn't exist. Please create a new account.".yellow
+        puts "I'm sorry that user doesn't exist. Please create a new account to rate a movie.".yellow 
         space_helper(2) 
         options 
         end 
@@ -234,7 +234,7 @@ class CommandLineInterface
                         space_helper(2) 
                         movie_rating = gets.chomp.to_i
                         space_helper(2)  
-                        puts "Rating added!" .yellow
+                        puts "Rating added!".yellow 
                         Review.create(movie_id: @find_movie.id, user_id: @find_user.id, rating: movie_rating)  
                         space_helper(2)  
                         options 
@@ -317,12 +317,12 @@ class CommandLineInterface
         puts "Here is your info- username: #{@find_user.username} age: #{@find_user.age}."
         space_helper(2) 
                 end    
-                puts "Are you sure you want to leave us?".yellow 
+                puts "Are you sure you want to leave us? Type 'yes' or 'no' to choose.".yellow 
                     space_helper(2) 
                     choice = gets.chomp
                     space_helper(2)
                     if choice != 'yes' && choice != 'no' 
-                        puts "Command not found, please type 'yes' or 'no' please.".yellow 
+                        puts "Command not found.".yellow 
                         delete_account 
                     elsif choice == 'no'
                         puts "Sounds good! Thanks for staying with us we love you.".yellow 

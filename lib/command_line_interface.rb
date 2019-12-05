@@ -11,14 +11,15 @@ class CommandLineInterface
 
 
     def greet
-        puts "||||||||||||||||||||||||||||||||||||||||||"
+        puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
         space_helper(2)
         puts "Let's look at some movies!".yellow 
         space_helper(2) 
-        puts "||||||||||||||||||||||||||||||||||||||||||"
+        #puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
     end
 
     def options
+        puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
         space_helper(2) 
         puts "What would you like to do? Please select a number from 1-6.".yellow  
         space_helper(2)
@@ -33,6 +34,10 @@ class CommandLineInterface
         puts "(5) Add a movie to our database." 
         space_helper(2) 
         puts "(6) Find movie by title."
+        space_helper(2) 
+        puts "(7) Find average rating for movie"
+        space_helper(2) 
+        puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
         space_helper(2) 
 
         input = gets.chomp
@@ -61,6 +66,10 @@ class CommandLineInterface
             space_helper(2) 
             puts "Let's find that movie quick.".yellow 
             find_by_title
+        elsif input == '7'
+            space_helper(2) 
+            puts "What movie are you looking for?".yellow 
+            average_movie_rating
         else
             space_helper(2) 
             puts "Command not found.".yellow 
@@ -84,7 +93,7 @@ class CommandLineInterface
         puts "I'm sorry please press r to return to the homepage.".yellow 
         display_movies
         elsif display_movie_input == "r"
-        #space_helper(2)
+        space_helper(2)
         options 
         end 
     end
@@ -129,6 +138,7 @@ class CommandLineInterface
                 if @find_movie == nil
                     #space_helper(2)
                     puts "I'm sorry, that movie isn't in our database.".yellow  
+                    space_helper(2) 
                     options
                 else
                     puts "Here's it is! #{@find_movie.title}: #{@find_movie.description}: #{@find_movie.genre}" 
@@ -138,15 +148,16 @@ class CommandLineInterface
 
     def new_user
         space_helper(2) 
-        puts "Please enter your username.".yellow
+        puts "Please enter a username.".yellow
         space_helper(2) 
         username = gets.chomp
         space_helper(2) 
-        puts "Please enter your age.".yellow 
+        puts "Please enter a age.".yellow  
         space_helper(2) 
         age_input = gets.chomp.to_i 
         space_helper(2) 
         puts "User created!".yellow 
+        space_helper(2) 
         User.create(username: username, age: age_input)
         options   
     end
@@ -180,7 +191,7 @@ class CommandLineInterface
                         movie_rating = gets.chomp.to_i
                         space_helper(2)  
                         puts "Rating added!" .yellow
-                        Review.create(movie_id: find_movie.id, user_id: find_user.id, rating: movie_rating)   
+                        Review.create(movie_id: @find_movie.id, user_id: @find_user.id, rating: movie_rating)   
                         options 
                     end 
         
@@ -225,7 +236,7 @@ class CommandLineInterface
                 options 
             end 
                 if @find_user != nil 
-                    puts "Here is your info- #{@find_user.username}: #{@find_user.age}."
+                    puts "Here is your info- username: #{@find_user.username} age: #{@find_user.age}."
                     space_helper(2) 
                     puts "Please enter a new username.".yellow 
                     space_helper(2) 
@@ -255,7 +266,7 @@ class CommandLineInterface
             options 
             end 
                 if @find_user != nil 
-        puts "Here is your info- #{@find_user.username}: #{@find_user.age}."
+        puts "Here is your info- username: #{@find_user.username} age: #{@find_user.age}."
         space_helper(2) 
                 end    
                 puts "Are you sure you want to leave us?".yellow 
@@ -279,6 +290,21 @@ class CommandLineInterface
                         puts "Your account and ratings have been deleted.".yellow  
                         options 
                    
+    end
+
+    def average_movie_rating
+        average_movie = []
+        space_helper(2) 
+        movie_name_input = gets.chomp.downcase
+        movie_find = Movie.find_by(title: movie_name_input.titleize)
+        moviesss = Review.where(movie_id: movie_find.id)  
+            # binding.pry
+        moviesss.each do |mo|
+            average_movie << mo.rating
+        end
+        average_rating = (average_movie.reduce(:+).to_f / average_movie.size).round(2) 
+        # average_rating = average_movie.reduce(:+) / average_movie.size
+        puts "The average for #{movie_name_input.titleize} is #{average_rating}" 
     end
 
    

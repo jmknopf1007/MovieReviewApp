@@ -107,12 +107,13 @@ class CommandLineInterface
         @find_user = User.find_by(username: username_info) 
         if @find_user == nil 
         puts "I'm sorry that user doesn't exist. Please create a new account.".yellow
-        new_user
+        space_helper(2) 
+        options 
         end 
             if @find_user != nil 
                 puts "What's the name of the movie you wish to add?".yellow 
                 space_helper(2) 
-                movie_name = gets.chomp
+                movie_name = gets.chomp.downcase 
                 space_helper(2) 
                 puts "Please enter a description.".yellow
                 space_helper(2) 
@@ -122,8 +123,9 @@ class CommandLineInterface
                 space_helper(2) 
                 movie_genre = gets.chomp
                 space_helper(2) 
-                puts "Movie added!"
-                Movie.create(title: movie_name, description: movie_description, genre: movie_genre) 
+                puts "Movie added!".yellow 
+                Movie.create(title: movie_name.titleize, description: movie_description, genre: movie_genre) 
+                space_helper(2)  
                 options 
             end
     end
@@ -132,16 +134,17 @@ class CommandLineInterface
         space_helper(2) 
         puts "What's the title of the movie you wish to find?".yellow 
         space_helper(2) 
-        movie_title = gets.chomp 
+        movie_title = gets.chomp .downcase
         space_helper(2) 
-        @find_movie = Movie.find_by(title: movie_title)
+        @find_movie = Movie.find_by(title: movie_title.titleize) 
                 if @find_movie == nil
                     #space_helper(2)
                     puts "I'm sorry, that movie isn't in our database.".yellow  
                     space_helper(2) 
                     options
                 else
-                    puts "Here's it is! #{@find_movie.title}: #{@find_movie.description}: #{@find_movie.genre}" 
+                    puts "Here's it is! #{@find_movie.title}: #{@find_movie.description}: #{@find_movie.genre}"
+                    space_helper(2)  
                     options 
                 end
     end
@@ -172,16 +175,18 @@ class CommandLineInterface
         #binding.pry 
         if @find_user == nil 
         puts "I'm sorry that user doesn't exist. Please create a new account.".yellow
-        new_user
+        space_helper(2) 
+        options 
         end 
             if @find_user != nil 
             puts "What movie would you like to rate?".yellow 
             space_helper(2) 
-            movie_title = gets.chomp
+            movie_title = gets.chomp.downcase 
             space_helper(2) 
-            @find_movie = Movie.find_by(title: movie_title)
+            @find_movie = Movie.find_by(title: movie_title.titleize)
                 if @find_movie == nil
                     puts "I'm sorry, that movie isn't in our database.".yellow 
+                    space_helper(2) 
                     options
                 end
             end
@@ -191,7 +196,8 @@ class CommandLineInterface
                         movie_rating = gets.chomp.to_i
                         space_helper(2)  
                         puts "Rating added!" .yellow
-                        Review.create(movie_id: @find_movie.id, user_id: @find_user.id, rating: movie_rating)   
+                        Review.create(movie_id: @find_movie.id, user_id: @find_user.id, rating: movie_rating)  
+                        space_helper(2)  
                         options 
                     end 
         
@@ -233,10 +239,11 @@ class CommandLineInterface
         @find_user = User.find_by(username: username_info) 
             if @find_user == nil
                 puts "I'm sorry that user doesn't exist.".yellow
+                space_helper(2) 
                 options 
             end 
                 if @find_user != nil 
-                    puts "Here is your info- username: #{@find_user.username} age: #{@find_user.age}."
+                    puts "Here is your info- username: #{@find_user.username} age: #{@find_user.age}." 
                     space_helper(2) 
                     puts "Please enter a new username.".yellow 
                     space_helper(2) 
@@ -248,6 +255,7 @@ class CommandLineInterface
                     space_helper(2) 
                     new_profile = @find_user.update(username: new_name, age: new_age) 
                     puts "Your new username is: #{@find_user.username}, and your new age is: #{@find_user.age}." 
+                    space_helper(2)  
                     options 
                 end
 
@@ -263,6 +271,7 @@ class CommandLineInterface
         @find_user = User.find_by(username: username_info) 
             if @find_user == nil
             puts "I'm sorry that user doesn't exist.".yellow
+            space_helper(2) 
             options 
             end 
                 if @find_user != nil 
@@ -278,6 +287,7 @@ class CommandLineInterface
                         delete_account 
                     elsif choice == 'no'
                         puts "Sounds good! Thanks for staying with us we love you.".yellow 
+                        space_helper(2) 
                         options
                     #end
                     elsif choice == 'yes'
@@ -287,32 +297,59 @@ class CommandLineInterface
                     end
                     @find_user.destroy 
                 end
-                        puts "Your account and ratings have been deleted.".yellow  
+                        puts "Your account and ratings have been deleted.".yellow 
+                        space_helper(2)  
                         options 
                    
     end
 
-    def average_movie_rating
-        average_movie = []
+    def average_movie_rating 
         space_helper(2) 
         movie_name_input = gets.chomp.downcase
-        movie_find = Movie.find_by(title: movie_name_input.titleize)
-        moviesss = Review.where(movie_id: movie_find.id)  
-            # binding.pry
-        moviesss.each do |mo|
-            average_movie << mo.rating
+        space_helper(2) 
+        @find_movie = Movie.find_by(title: movie_name_input.titleize)  
+        if @find_movie == nil 
+            puts "I'm sorry, that movie isn't in our database.".yellow 
+            space_helper(2)  
+            options 
+        end
+        average_movie = []
+        final_movie = Review.where(movie_id: @find_movie.id) 
+        if final_movie.empty? 
+        puts "There are no reviews yet for this movie.".yellow 
+        space_helper(2)  
+        options   
+        else 
+        final_movie.each do |movie|
+            average_movie << movie.rating 
+            end
         end
         average_rating = (average_movie.reduce(:+).to_f / average_movie.size).round(2) 
-        # average_rating = average_movie.reduce(:+) / average_movie.size
-        puts "The average for #{movie_name_input.titleize} is #{average_rating}" 
-    end
-
-   
-
+        puts "The average rating for #{movie_name_input.titleize} is #{average_rating}"
+        space_helper(2) 
+        options  
+    end 
 
 
+  
+    # def average_movie_rating
+    #     average_movie = []
+    #     space_helper(2) 
+    #     movie_name_input = gets.chomp.downcase
+    #     movie_find = Movie.find_by(title: movie_name_input.titleize)
+    #     moviesss = Review.where(movie_id: movie_find.id)  
+    #         # binding.pry
+    #     moviesss.each do |movie|
+    #         average_movie << movie.rating 
+    #         end
+    #     end
+    #     average_rating = (average_movie.reduce(:+).to_f / average_movie.size).round(2) 
+    #     # average_rating = average_movie.reduce(:+) / average_movie.size
+    #     puts "The average rating for #{movie_name_input.titleize} is #{average_rating}" 
+    # end 
 
 
+    
 end
 
 

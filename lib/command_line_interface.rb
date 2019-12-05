@@ -364,13 +364,13 @@ class CommandLineInterface
             end
         end
         average_rating = (average_movie.reduce(:+).to_f / average_movie.size).round(2) 
-        puts "The average rating for #{movie_name_input.titleize} is #{average_rating}"
+        puts "The average rating for #{movie_name_input.titleize} is #{average_rating}." 
         space_helper(2) 
         options  
     end 
 
-
-  
+    
+    
     # def average_movie_rating
     #     average_movie = []
     #     space_helper(2) 

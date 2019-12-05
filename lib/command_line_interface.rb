@@ -13,7 +13,7 @@ class CommandLineInterface
     def greet
         puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
         space_helper(2)
-        puts "Let's look at some movies!".yellow 
+        puts "Welcome to our movie database!".yellow   
         space_helper(2) 
         #puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
     end
@@ -21,21 +21,23 @@ class CommandLineInterface
     def options
         puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
         space_helper(2) 
-        puts "What would you like to do? Please select a number from 1-6.".yellow  
+        puts "What would you like to do? Please select a number from 1-8.".yellow  
         space_helper(2)
-        puts "(1) View all movies."
+        puts "(1) Create new user."
         space_helper(2)
-        puts "(2) Rate a movie."
+        puts "(2) Edit user info."
         space_helper(2)
-        puts "(3) Create new user."
+        puts "(3) View all movies."
         space_helper(2)
-        puts "(4) Edit user info."  
+        puts "(4) Find movie by title" 
         space_helper(2)
         puts "(5) Add a movie to our database." 
         space_helper(2) 
-        puts "(6) Find movie by title."
+        puts "(6) Rate a movie."
         space_helper(2) 
         puts "(7) Find average rating for movie"
+        space_helper(2) 
+        puts "(8) Exit this program." 
         space_helper(2) 
         puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
         space_helper(2) 
@@ -44,35 +46,41 @@ class CommandLineInterface
 
         if input == '1'
             space_helper(2) 
-            puts "Sounds good, let's take a look.".yellow 
-            display_movies
-        elsif input == '2'
-            space_helper(2) 
-            puts "Yes, let's go rate something.".yellow
-            rate_movie
-        elsif input == '3' 
-            space_helper(2) 
             puts "Yay! Welcome to the family!".yellow
             new_user
-        elsif input == '4'
+        elsif input == '2'
             space_helper(2) 
             puts "Would you like to edit your info, or delete your account?".yellow 
             edit_user_info
+        elsif input == '3' 
+            space_helper(2) 
+            puts "Sounds good, let's take a look.".yellow 
+            display_movies
+        elsif input == '4'
+            space_helper(2) 
+            puts "Let's find that movie quick.".yellow 
+            find_by_title
         elsif input == '5'
             space_helper(2) 
             puts "Oh yeah what movie you got for us?!".yellow 
             add_movie 
         elsif input == '6'
             space_helper(2) 
-            puts "Let's find that movie quick.".yellow 
-            find_by_title
+            puts "Yeah, let's go rate something.".yellow
+            rate_movie
         elsif input == '7'
             space_helper(2) 
             puts "What movie are you looking for?".yellow 
             average_movie_rating
+        elsif input == '8' 
+            space_helper(2)
+            puts "Goodbye!".yellow 
+            space_helper(2)   
+            exit_program  
         else
             space_helper(2) 
             puts "Command not found.".yellow 
+            space_helper(2) 
             options 
         end 
     end
@@ -348,8 +356,11 @@ class CommandLineInterface
     #     puts "The average rating for #{movie_name_input.titleize} is #{average_rating}" 
     # end 
 
+    def exit_program
+        exit 
+    end
 
-    
+
 end
 
 

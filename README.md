@@ -39,4 +39,4 @@ The program is built to guide you through:<br>
 - I would like to thank Michael in mod 2 for helping me with the average_movie_rating method. So helpful!<br>
 - I would like to thank Sean in mod 1 for showing me how to use STDIN.getch.<br>
 - I would like to thank Tanner in mod 1 for keeping me motivated throughout this creation process.<br>  
-- I would like to thank everyone associated with mod 1 for their help, support, and encouragement.<br>
+- I would like to thank everyone associated with mod 1 for their advice, support, and encouragement.<br> 

@@ -32,13 +32,13 @@ class CommandLineInterface
         space_helper(2)
         puts "(3) View all movies."
         space_helper(2)
-        puts "(4) Find movie by title" 
+        puts "(4) Find a movie by title." 
         space_helper(2)
         puts "(5) Add a movie to our database." 
         space_helper(2) 
         puts "(6) Rate a movie."
         space_helper(2) 
-        puts "(7) Find average rating for movie." 
+        puts "(7) Find the average rating for a movie." 
         space_helper(2) 
         puts "(8) Exit this program." 
         space_helper(2) 

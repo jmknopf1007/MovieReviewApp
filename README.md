@@ -8,6 +8,7 @@ Fork the repository and then in your terminal:<br>
 - type 'bundle install' and hit enter<br>
 - type 'rake db:migrate' and hit enter<br>
 - type 'rake db:seed' and hit enter<br>
+- for the best effect type 'brew cask install cool-retro-term' and use the amber style from preferences. (*optional*)
 
 After that, everything should be set up on your local machine and good to go!<br>
 
@@ -35,7 +36,8 @@ The program is built to guide you through:<br>
 
 - I would like to thank Devin in mod 2 for his space_helper function idea.<br>
 - I would like to thank Tiffany in mod 2 for finding/sharing the reset-pk-sequence gem.<br>
-- I would like to thank Michael in mod 2 for helping me with the average_movie_rating method. So helpful!<br>
-- I would like to thank Sean in mod 1 for showing me how to use STDIN.getch.<br>
-- I would like to thank Tanner in mod 1 for keeping me motivated throughout this creation process.<br>  
-- I would like to thank everyone associated with mod 1 for their advice, support, and encouragement.<br> 
+- I would like to thank Michael in mod 2 for showing me the cool-retro-term emulator. So cool!<br>
+- I would like to thank Sean in mod 1 for showing me how to use STDIN.getch.<br> 
+- I would like to thank everyone associated with mod 1 for their advice, support, and encouragement throughout this creation process.<br> 
+
+

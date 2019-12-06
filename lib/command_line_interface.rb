@@ -21,26 +21,10 @@ class CommandLineInterface
         space_helper(2) 
     end
     
-        # puts "  #  #  #  ######  #        ####    ####   #    #  ######  ### "
-        # puts "  #  #  #  #       #       #    #  #    #  ##  ##  #       ### "
-        # puts "  #  #  #  #####   #       #       #    #  # ## #  #####    #  "
-        # puts "  #  #  #  #       #       #       #    #  #    #  #           "         
-        # puts "  #  #  #  #       #       #    #  #    #  #    #  #       ### "
-        # puts "   ## ##   ######  ######   ####    ####   #    #  ######  ### " 
-
-
-    # def greet
-    #     puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
-    #     space_helper(2)
-    #     puts "Welcome to our movie database!".yellow   
-    #     space_helper(2) 
-    #     #puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
-    # end
-
     def options
         puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
         space_helper(2) 
-        puts "What would you like to do? Please select a number from 1-8.".yellow  
+        puts "What would you like to do? Please select a number from 1-8.".cyan   
         space_helper(2)
         puts "(1) Create new user."
         space_helper(2)
@@ -65,31 +49,31 @@ class CommandLineInterface
 
         if input == '1'
             space_helper(2) 
-            puts "Yay! Welcome to the family!".yellow
+            puts "Yay! Welcome to the family!".cyan
             new_user
         elsif input == '2'
             space_helper(2) 
-            puts "Would you like to edit your info, or delete your account?".yellow 
+            puts "Would you like to edit your info, or delete your account?".cyan  
             edit_user_info
         elsif input == '3' 
             space_helper(2) 
-            puts "Sounds good, let's take a look.".yellow 
+            puts "Sounds good, let's take a look.".cyan
             display_movies
         elsif input == '4'
             space_helper(2) 
-            puts "Let's find that movie quick.".yellow 
+            puts "What's the title of the movie you wish to find?".cyan   
             find_by_title
         elsif input == '5'
             space_helper(2) 
-            puts "Oh yeah what movie you got for us?!".yellow 
+            puts "Oh yeah what movie you got for us?!".cyan
             add_movie 
         elsif input == '6'
             space_helper(2) 
-            puts "Yeah, let's go rate something.".yellow
+            puts "Yeah, let's go rate something.".cyan
             rate_movie
         elsif input == '7'
             space_helper(2) 
-            puts "What movie are you looking for?".yellow 
+            puts "What movie are you looking for?".cyan
             average_movie_rating
         elsif input == '8' 
             space_helper(2)
@@ -105,7 +89,7 @@ class CommandLineInterface
             exit_program  
         else
             space_helper(2) 
-            puts "Command not found.".yellow 
+            puts "Command not found.".cyan 
             space_helper(2) 
             options 
         end 
@@ -117,7 +101,7 @@ class CommandLineInterface
             puts "#{movie.id}: #{movie.title}: #{movie.description}: #{movie.genre}"  
             space_helper(2)
         end 
-        puts "Press any key to return to the homepage.".yellow 
+        puts "Press any key to return to the homepage.".cyan
         space_helper(2)
         STDIN.getch 
         options 
@@ -146,43 +130,47 @@ class CommandLineInterface
 
     def add_movie
         space_helper(2)
-        puts "Please enter your username.".yellow 
+        puts "Please enter your username. Type 'exit' to return to the homepage.".cyan
         space_helper(2) 
         username_info = gets.chomp.downcase 
-        space_helper(2) 
-        @find_user = User.find_by(username: username_info.titleize)  
-        if @find_user == nil 
-        puts "I'm sorry that user doesn't exist. Please create a new account to add a movie.".yellow 
-        space_helper(2) 
-        options 
-        end 
+        space_helper(2)
+            if username_info == 'exit'
+                options
+            else 
+            @find_user = User.find_by(username: username_info.titleize)  
+                if @find_user == nil 
+                puts "I'm sorry that user doesn't exist. Please create a new account to add a movie.".cyan 
+                space_helper(2) 
+                options 
+                end
+            end 
             if @find_user != nil 
-                puts "What's the name of the movie you wish to add?".yellow 
+                puts "What's the name of the movie you wish to add?".cyan
                 space_helper(2) 
                 movie_name = gets.chomp.downcase 
                 space_helper(2) 
-                puts "Please enter a description.".yellow
+                puts "Please enter a description.".cyan
                 space_helper(2) 
                 movie_description = gets.chomp.downcase 
                 space_helper(2) 
-                puts "Please enter a genre.".yellow 
+                puts "Please enter a genre.".cyan 
                 space_helper(2) 
                 movie_genre = gets.chomp.downcase 
                 space_helper(2)
-                puts "If you are finished type 'yes', or type 'no' to start over.".yellow 
+                puts "If you are finished type 'yes', or type 'no' to start over.".cyan
                 space_helper(2) 
                 response = gets.chomp.downcase 
                 space_helper(2) 
                 if response != 'yes' && response != 'no' 
-                    puts "Command not found.".yellow 
+                    puts "Command not found.".cyan
                     #space_helper(2) 
                     add_movie 
                 elsif response == 'no'
-                    puts "Sounds good! Let's try again.".yellow 
+                    puts "Sounds good! Let's try again.".cyan
                     #space_helper(2) 
                     add_movie 
                 elsif response == 'yes'
-                puts "Movie added!".yellow 
+                puts "Movie added!".cyan  
                 Movie.create(title: movie_name.titleize, description: movie_description, genre: movie_genre) 
                 space_helper(2)  
                 options 
@@ -192,70 +180,82 @@ class CommandLineInterface
 
     def find_by_title
         space_helper(2) 
-        puts "What's the title of the movie you wish to find?".yellow 
+        puts "Type 'exit' to return to the homepage.".cyan 
         space_helper(2) 
         movie_title = gets.chomp .downcase
-        space_helper(2) 
+        space_helper(2)
+        if movie_title == 'exit'
+            options
+        else  
         @find_movie = Movie.find_by(title: movie_title.titleize) 
                 if @find_movie == nil
                     #space_helper(2)
-                    puts "I'm sorry, that movie isn't in our database.".yellow  
+                    puts "I'm sorry, that movie isn't in our database.".cyan  
                     space_helper(2) 
                     options
                 else
-                    puts "Here's it is! #{@find_movie.title}: #{@find_movie.description}: #{@find_movie.genre}"
+                    puts "Here's it is! #{@find_movie.title}: #{@find_movie.description}: #{@find_movie.genre}".cyan 
                     space_helper(2)  
                     options 
                 end
-    end
+            end
+        end
 
     def new_user
         space_helper(2) 
-        puts "Please enter a username.".yellow
+        puts "Please enter a username. Type 'exit' to return to the homepage.".cyan
         space_helper(2) 
         username = gets.chomp.downcase
         space_helper(2) 
-        puts "Please enter a age.".yellow  
+        if username == 'exit'
+            options
+        else  
+        puts "Please enter a age.".cyan  
         space_helper(2) 
         age_input = gets.chomp.to_i 
         space_helper(2) 
-        puts "User created!".yellow 
+        puts "User created!".cyan 
         space_helper(2) 
         User.create(username: username.titleize, age: age_input) 
-        options   
+        options  
+        end  
     end
 
     def rate_movie
         space_helper(2)
-        puts "Please enter your username.".yellow 
+        puts "Please enter your username. Type 'exit' to return to the homepage.".cyan 
         space_helper(2) 
         username_info = gets.chomp.downcase
-        space_helper(2) 
+        space_helper(2)
+        if username_info == 'exit'
+            options
+        else 
         @find_user = User.find_by(username: username_info.titleize)  
         #binding.pry 
-        if @find_user == nil 
-        puts "I'm sorry that user doesn't exist. Please create a new account to rate a movie.".yellow 
-        space_helper(2) 
-        options 
-        end 
+                if @find_user == nil 
+                puts "I'm sorry that user doesn't exist. Please create a new account to rate a movie.".cyan 
+                space_helper(2) 
+                options 
+            end 
+        end
             if @find_user != nil 
-            puts "What movie would you like to rate?".yellow 
+            puts "What movie would you like to rate?".cyan 
             space_helper(2) 
             movie_title = gets.chomp.downcase 
             space_helper(2) 
             @find_movie = Movie.find_by(title: movie_title.titleize)
                 if @find_movie == nil
-                    puts "I'm sorry, that movie isn't in our database.".yellow 
+                    puts "I'm sorry, that movie isn't in our database.".cyan 
                     space_helper(2) 
                     options
                 end
             end
                     if @find_movie != nil
-                        puts "Please enter a rating for this movie.".yellow
+                        puts "Please enter a rating for this movie.".cyan
                         space_helper(2) 
                         movie_rating = gets.chomp.to_i
                         space_helper(2)  
-                        puts "Rating added!".yellow 
+                        puts "Rating added!".cyan
                         Review.create(movie_id: @find_movie.id, user_id: @find_user.id, rating: movie_rating)  
                         space_helper(2)  
                         options 
@@ -277,51 +277,55 @@ class CommandLineInterface
 
         if u_info == '1'
             space_helper(2) 
-            puts "Alright let's edit.".yellow
+            puts "Alright let's edit.".cyan
             edit_account 
         elsif
             u_info == '2'
             space_helper(2) 
-            puts "Sorry to see you go.".yellow 
+            puts "Sorry to see you go.".cyan 
             delete_account
         elsif
             u_info == '3'
             space_helper(2) 
-            puts "Sounds good!".yellow
+            puts "Sounds good!".cyan
             space_helper(2) 
             options 
         else
             space_helper(2) 
-            puts "Command not found. Type '1','2', or '3' please.".yellow  
+            puts "Command not found. Type '1','2', or '3' please.".cyan 
             edit_user_info
         end
     end
 
     def edit_account
         space_helper(2) 
-        puts "Please enter your username.".yellow 
+        puts "Please enter your username. Type 'exit' to return to the homepage.".cyan 
         space_helper(2) 
         username_info = gets.chomp.downcase
         space_helper(2) 
+        if username_info == 'exit'
+            options
+        else 
         @find_user = User.find_by(username: username_info.titleize)  
             if @find_user == nil
-                puts "I'm sorry that user doesn't exist.".yellow
+                puts "I'm sorry that user doesn't exist.".cyan
                 space_helper(2) 
                 options 
-            end 
+            end
+        end 
                 if @find_user != nil 
-                    puts "Here is your info- username: #{@find_user.username} age: #{@find_user.age}." 
+                    puts "Here is your info- username: #{@find_user.username}, age: #{@find_user.age}.".cyan 
                     space_helper(2) 
-                    puts "Please enter a new username.".yellow 
+                    puts "Please enter a new username.".cyan
                     space_helper(2) 
                     new_name = gets.chomp.downcase  
                     space_helper(2) 
-                    puts "Please enter a new age.".yellow 
+                    puts "Please enter a new age.".cyan
                     space_helper(2) 
                     new_age = gets.chomp 
                     space_helper(2) 
                     new_profile = @find_user.update(username: new_name.titleize, age: new_age) 
-                    puts "Your new username is: #{@find_user.username}, and your new age is: #{@find_user.age}." 
+                    puts "Your new username is: #{@find_user.username}, and your new age is: #{@find_user.age}.".cyan 
                     space_helper(2)  
                     options 
                 end
@@ -331,29 +335,33 @@ class CommandLineInterface
 
     def delete_account
         space_helper(2) 
-        puts "Please enter your username.".yellow 
+        puts "Please enter your username. Type 'exit' to return to the homepage.".cyan
         space_helper(2) 
         username_info = gets.chomp.downcase
-        space_helper(2) 
+        space_helper(2)
+        if username_info == 'exit'
+            options
+        else  
         @find_user = User.find_by(username: username_info.titleize)  
             if @find_user == nil
-            puts "I'm sorry that user doesn't exist.".yellow
+            puts "I'm sorry that user doesn't exist.".cyan
             space_helper(2) 
             options 
             end 
+        end
                 if @find_user != nil 
-        puts "Here is your info- username: #{@find_user.username} age: #{@find_user.age}."
+        puts "Here is your info- username: #{@find_user.username}, age: #{@find_user.age}.".cyan
         space_helper(2) 
                 end    
-                puts "Are you sure you want to leave us? Type 'yes' or 'no' to choose.".yellow 
+                puts "Are you sure you want to leave us? Type 'yes' or 'no' to choose.".cyan 
                     space_helper(2) 
                     choice = gets.chomp
                     space_helper(2)
                     if choice != 'yes' && choice != 'no' 
-                        puts "Command not found.".yellow 
+                        puts "Command not found.".cyan 
                         delete_account 
                     elsif choice == 'no'
-                        puts "Sounds good! Thanks for staying with us we love you.".yellow 
+                        puts "Sounds good! Thanks for staying with us we love you.".cyan 
                         space_helper(2) 
                         options
                     #end
@@ -364,7 +372,7 @@ class CommandLineInterface
                     end
                     @find_user.destroy 
                 end
-                        puts "Your account and ratings have been deleted.".yellow 
+                        puts "Your account and ratings have been deleted.".cyan 
                         space_helper(2)  
                         options 
                    
@@ -372,27 +380,33 @@ class CommandLineInterface
 
     def average_movie_rating 
         space_helper(2) 
+        puts "Type 'exit' to return to the homepage.".cyan 
+        space_helper(2) 
         movie_name_input = gets.chomp.downcase
         space_helper(2) 
-        @find_movie = Movie.find_by(title: movie_name_input.titleize)  
-        if @find_movie == nil 
-            puts "I'm sorry, that movie isn't in our database.".yellow 
-            space_helper(2)  
-            options 
-        end
+            if movie_name_input == 'exit'
+                options
+            else 
+            @find_movie = Movie.find_by(title: movie_name_input.titleize)  
+                if @find_movie == nil 
+                    puts "I'm sorry, that movie isn't in our database.".cyan
+                    space_helper(2)  
+                    options 
+                end
+            end
         average_movie = []
         final_movie = Review.where(movie_id: @find_movie.id) 
-        if final_movie.empty? 
-        puts "There are no reviews yet for #{movie_name_input.titleize}.".yellow 
-        space_helper(2)  
-        options   
+            if final_movie.empty? 
+            puts "There are no reviews yet for #{movie_name_input.titleize}.".cyan 
+            space_helper(2)  
+            options   
         else 
         final_movie.each do |movie|
             average_movie << movie.rating 
             end
         end
         average_rating = (average_movie.reduce(:+).to_f / average_movie.size).round(2) 
-        puts "The average rating for #{movie_name_input.titleize} is #{average_rating}." 
+        puts "The average rating for #{movie_name_input.titleize} is #{average_rating}.".cyan  
         space_helper(2) 
         options  
     end 

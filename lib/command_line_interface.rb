@@ -292,7 +292,7 @@ class CommandLineInterface
             options 
         else
             space_helper(2) 
-            puts "Command not found. Type '1','2', or '3' please.".cyan 
+            puts "Command not found. Please select a number from 1-3.".cyan 
             edit_user_info
         end
     end

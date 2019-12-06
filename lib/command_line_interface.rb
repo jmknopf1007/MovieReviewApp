@@ -93,7 +93,14 @@ class CommandLineInterface
             average_movie_rating
         elsif input == '8' 
             space_helper(2)
-            puts "Goodbye!".yellow 
+            #puts "Goodbye!".yellow 
+            puts "   #####                                                   "
+            puts "  #     #   ####    ####   #####   #####   #   #  ######   "
+            puts "  #        #    #  #    #  #    #  #    #   # #   #        "
+            puts "  #  ####  #    #  #    #  #    #  #####     #    #####    "
+            puts "  #     #  #    #  #    #  #    #  #    #    #    #        "
+            puts "  #     #  #    #  #    #  #    #  #    #    #    #        "
+            puts "   #####    ####    ####   #####   #####     #    ######   "          
             space_helper(2)   
             exit_program  
         else
@@ -161,12 +168,26 @@ class CommandLineInterface
                 puts "Please enter a genre.".yellow 
                 space_helper(2) 
                 movie_genre = gets.chomp.downcase 
+                space_helper(2)
+                puts "If you are finished type 'yes', or type 'no' to start over.".yellow 
                 space_helper(2) 
+                response = gets.chomp.downcase 
+                space_helper(2) 
+                if response != 'yes' && response != 'no' 
+                    puts "Command not found.".yellow 
+                    #space_helper(2) 
+                    add_movie 
+                elsif response == 'no'
+                    puts "Sounds good!".yellow 
+                    #space_helper(2) 
+                    add_movie 
+                elsif response == 'yes'
                 puts "Movie added!".yellow 
                 Movie.create(title: movie_name.titleize, description: movie_description, genre: movie_genre) 
                 space_helper(2)  
                 options 
             end
+        end
     end
 
     def find_by_title
@@ -240,7 +261,6 @@ class CommandLineInterface
                         options 
                     end 
         
-    
 
     end
 
@@ -355,7 +375,7 @@ class CommandLineInterface
         average_movie = []
         final_movie = Review.where(movie_id: @find_movie.id) 
         if final_movie.empty? 
-        puts "There are no reviews yet for this movie.".yellow 
+        puts "There are no reviews yet for #{movie_name_input.titleize}.".yellow 
         space_helper(2)  
         options   
         else 

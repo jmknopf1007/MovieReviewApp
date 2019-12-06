@@ -4,8 +4,7 @@ For my mod 1 final project I built a Command Line movie database application.
 
 ## Installation 
 
-Fork the repository<br>
-In your terminal:<br>
+Fork the repository and then in your terminal:<br> 
 - type 'bundle install' and hit enter<br>
 - type 'rake db:migrate' and hit enter<br>
 - type 'rake db:seed' and hit enter<br>
@@ -14,12 +13,12 @@ After that, everything should be set up on your local machine and good to go!<br
 
 ## Running this program
 
-The run file is located in the bin folder<br>
-To run the program, go to your terminal and type 'ruby bin/run.rb' and hit enter<br>
+The run file is located in the bin folder.<br>
+To run the program, go to your terminal and type 'ruby bin/run.rb' and hit enter.<br>
 
 ## How to navigate this program
 
-Follow all the command prompts<br>
+Follow all the command prompts.<br>
 The program is built to guide you through:<br>
 - it will handle all user inputs<br>
 - let you know if something was not valid<br>

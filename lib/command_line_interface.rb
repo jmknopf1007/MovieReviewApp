@@ -178,7 +178,7 @@ class CommandLineInterface
                     #space_helper(2) 
                     add_movie 
                 elsif response == 'no'
-                    puts "Sounds good!".yellow 
+                    puts "Sounds good! Let's try again.".yellow 
                     #space_helper(2) 
                     add_movie 
                 elsif response == 'yes'

@@ -268,7 +268,9 @@ class CommandLineInterface
         space_helper(2) 
         puts "(1) Edit user information."
         space_helper(2) 
-        puts "(2) Delete user account"
+        puts "(2) Delete user account."
+        space_helper(2) 
+        puts "(3) Return to homepage."
         space_helper(2) 
 
         u_info = gets.chomp 
@@ -282,9 +284,15 @@ class CommandLineInterface
             space_helper(2) 
             puts "Sorry to see you go.".yellow 
             delete_account
+        elsif
+            u_info == '3'
+            space_helper(2) 
+            puts "Sounds good!".yellow
+            space_helper(2) 
+            options 
         else
             space_helper(2) 
-            puts "Command not found. Select '1' or '2' please.".yellow 
+            puts "Command not found. Type '1','2', or '3' please.".yellow  
             edit_user_info
         end
     end

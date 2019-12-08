@@ -11,19 +11,29 @@ class CommandLineInterface
 
     def greet
         puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
-        space_helper(2)
-        puts "  #  #  #  ######  #        ####    ####   #    #  ######  ### "
-        puts "  #  #  #  #       #       #    #  #    #  ##  ##  #       ### "
-        puts "  #  #  #  #####   #       #       #    #  # ## #  #####    #  "
-        puts "  #  #  #  #       #       #       #    #  #    #  #           "         
-        puts "  #  #  #  #       #       #    #  #    #  #    #  #       ### "
-        puts "   ## ##   ######  ######   ####    ####   #    #  ######  ### " 
+        space_helper(2)                                                                                                                                                                    
+        puts " #     #  #  #    #  #####    ##     ####   ######  ######  #       #  #    # "
+        puts " #     #  #  ##   #    #     #  #   #    #  #       #       #       #   #  #  "
+        puts " #     #  #  # #  #    #    #    #  #       #####   #####   #       #    ##   "
+        puts "  #   #   #  #  # #    #    ######  #  ###  #       #       #       #    ##   "
+        puts "   # #    #  #   ##    #    #    #  #    #  #       #       #       #   #  #  "
+        puts "    #     #  #    #    #    #    #   ####   ######  #       ######  #  #    # "                                                                                                                                                         
+        # puts "  #  #  #  ######  #        ####    ####   #    #  ######  ### "
+        # puts "  #  #  #  #       #       #    #  #    #  ##  ##  #       ### "
+        # puts "  #  #  #  #####   #       #       #    #  # ## #  #####    #  "
+        # puts "  #  #  #  #       #       #       #    #  #    #  #           "         
+        # puts "  #  #  #  #       #       #    #  #    #  #    #  #       ### "
+        # puts "   ## ##   ######  ######   ####    ####   #    #  ######  ### " 
         space_helper(2) 
     end
     
     def options
         puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
-        space_helper(2) 
+        space_helper(2)
+        puts "Welcome to Vintageflix!".cyan 
+        space_helper(2)
+        puts "This is a movie database for classic films.".cyan 
+        space_helper(2)  
         puts "What would you like to do? Please select a number from 1-8.".cyan   
         space_helper(2)
         puts "(1) Create new user."

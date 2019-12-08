@@ -8,7 +8,7 @@ Fork the repository and then in your terminal:<br>
 - type 'bundle install' and hit enter<br>
 - type 'rake db:migrate' and hit enter<br>
 - type 'rake db:seed' and hit enter<br>
-- for the best effect type 'brew cask install cool-retro-term' and use the futuristic style from preferences. (*optional*)
+- for the best effect type 'brew cask install cool-retro-term' and use the amber style from preferences. (*optional*)
 
 After that, everything should be set up on your local machine and good to go!<br>
 

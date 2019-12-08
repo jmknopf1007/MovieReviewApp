@@ -47,7 +47,7 @@ class CommandLineInterface
 
         input = gets.chomp
 
-        if input == '1'
+        if input == '1'   
             space_helper(2) 
             puts "Yay! Welcome to the family!".cyan
             new_user
@@ -149,18 +149,24 @@ class CommandLineInterface
                 space_helper(2) 
                 movie_name = gets.chomp.downcase 
                 space_helper(2) 
-                puts "Please enter a description.".cyan
-                space_helper(2) 
-                movie_description = gets.chomp.downcase 
-                space_helper(2) 
-                puts "Please enter a genre.".cyan 
-                space_helper(2) 
-                movie_genre = gets.chomp.downcase 
-                space_helper(2)
-                puts "If you are finished type 'yes', or type 'no' to start over.".cyan
-                space_helper(2) 
-                response = gets.chomp.downcase 
-                space_helper(2) 
+                @find_movie = Movie.find_by(title: movie_name.titleize) 
+                if @find_movie != nil 
+                    puts "I'm sorry #{@find_movie.title} is already in the database. Please add a different movie.".cyan     
+                    add_movie
+                elsif
+                    @find_movie == nil  
+                    puts "Please enter a description.".cyan
+                    space_helper(2) 
+                    movie_description = gets.chomp.downcase 
+                    space_helper(2) 
+                    puts "Please enter a genre.".cyan 
+                    space_helper(2) 
+                    movie_genre = gets.chomp.downcase 
+                    space_helper(2)
+                    puts "If you are finished type 'yes', or type 'no' to start over.".cyan
+                    space_helper(2) 
+                    response = gets.chomp.downcase 
+                    space_helper(2) 
                 if response != 'yes' && response != 'no' 
                     puts "Command not found.".cyan
                     #space_helper(2) 
@@ -170,10 +176,11 @@ class CommandLineInterface
                     #space_helper(2) 
                     add_movie 
                 elsif response == 'yes'
-                puts "Movie added!".cyan  
-                Movie.create(title: movie_name.titleize, description: movie_description, genre: movie_genre) 
-                space_helper(2)  
-                options 
+                    puts "Movie added!".cyan  
+                    Movie.create(title: movie_name.titleize, description: movie_description, genre: movie_genre) 
+                    space_helper(2)  
+                    options 
+                end
             end
         end
     end
@@ -182,7 +189,7 @@ class CommandLineInterface
         space_helper(2) 
         puts "Type 'exit' to return to the homepage.".cyan 
         space_helper(2) 
-        movie_title = gets.chomp .downcase
+        movie_title = gets.chomp.downcase 
         space_helper(2)
         if movie_title == 'exit'
             options
@@ -209,17 +216,42 @@ class CommandLineInterface
         space_helper(2) 
         if username == 'exit'
             options
-        else  
-        puts "Please enter a age.".cyan  
-        space_helper(2) 
-        age_input = gets.chomp.to_i 
-        space_helper(2) 
-        puts "User created!".cyan 
-        space_helper(2) 
-        User.create(username: username.titleize, age: age_input) 
-        options  
-        end  
-    end
+        end
+        @find_user = User.find_by(username: username.titleize)
+            if @find_user != nil
+                puts "I'm sorry that username is already taken. Please enter a different name.".cyan 
+                new_user
+                    else  
+                    puts "Enter a age. Please select a number from 1-100.".cyan  
+                    space_helper(2) 
+                    age_input = gets.chomp.to_i 
+                    space_helper(2) 
+                    if age_input > 100 || age_input < 1   
+                        puts "You must select a number from 1-100. Please try again.".cyan 
+                        new_user
+                    elsif age_input <= 100 && age_input >= 1 
+                    puts "If you are finished type 'yes', or type 'no' to start over.".cyan
+                    space_helper(2) 
+                    response = gets.chomp.downcase 
+                    space_helper(2) 
+                if response != 'yes' && response != 'no' 
+                    puts "Command not found.".cyan
+                    #space_helper(2) 
+                    new_user 
+                elsif response == 'no'
+                    puts "Sounds good! Let's try again.".cyan
+                    #space_helper(2) 
+                    new_user
+                elsif response == 'yes'
+                    puts "User created!".cyan 
+                    space_helper(2) 
+                    User.create(username: username.titleize, age: age_input) 
+                    options  
+                    end  
+                end
+            end
+        end 
+
 
     def rate_movie
         space_helper(2)
@@ -251,18 +283,21 @@ class CommandLineInterface
                 end
             end
                     if @find_movie != nil
-                        puts "Please enter a rating for this movie.".cyan
+                        puts "Enter a rating for this movie. Please select a number from 1-10.".cyan 
                         space_helper(2) 
                         movie_rating = gets.chomp.to_i
-                        space_helper(2)  
-                        puts "Rating added!".cyan
-                        Review.create(movie_id: @find_movie.id, user_id: @find_user.id, rating: movie_rating)  
-                        space_helper(2)  
-                        options 
+                        space_helper(2) 
+                        if movie_rating > 10 || movie_rating < 1   
+                            puts "You must select a number from 1-10. Please try again.".cyan 
+                            rate_movie
+                        elsif movie_rating <= 10 && movie_rating >= 1   
+                            puts "Rating added!".cyan
+                            Review.create(movie_id: @find_movie.id, user_id: @find_user.id, rating: movie_rating)  
+                            space_helper(2)  
+                            options 
+                        end 
                     end 
-        
-
-    end
+        end
 
     def edit_user_info
         space_helper(2) 
@@ -320,16 +355,35 @@ class CommandLineInterface
                     space_helper(2) 
                     new_name = gets.chomp.downcase  
                     space_helper(2) 
-                    puts "Please enter a new age.".cyan
+                    puts "Enter a new age. Please select a number from 1-100.".cyan
                     space_helper(2) 
-                    new_age = gets.chomp 
+                    new_age = gets.chomp.to_i 
+                    space_helper(2)
+                    if new_age > 100 || new_age < 1   
+                        puts "You must select a number from 1-100. Please try again.".cyan 
+                        edit_account
+                    elsif new_age <= 100 && new_age >= 1 
+                    #space_helper(2) 
+                    puts "If you are finished type 'yes', or type 'no' to start over.".cyan
                     space_helper(2) 
+                    response = gets.chomp.downcase 
+                    space_helper(2) 
+                if response != 'yes' && response != 'no' 
+                    puts "Command not found.".cyan
+                    #space_helper(2) 
+                    edit_account 
+                elsif response == 'no'
+                    puts "Sounds good! Let's try again.".cyan
+                    #space_helper(2) 
+                    edit_account
+                elsif response == 'yes'
                     new_profile = @find_user.update(username: new_name.titleize, age: new_age) 
                     puts "Your new username is: #{@find_user.username}, and your new age is: #{@find_user.age}.".cyan 
                     space_helper(2)  
                     options 
                 end
-
+            end
+        end
     end
 
 

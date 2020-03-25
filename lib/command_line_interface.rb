@@ -10,7 +10,7 @@ class CommandLineInterface
     end
 
     def greet
-        puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+        puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
         space_helper(2)                                                                                                                                                                    
         puts " #     #  #  #    #  #####    ##     ####   ######  ######  #       #  #    # "
         puts " #     #  #  ##   #    #     #  #   #    #  #       #       #       #   #  #  "
@@ -28,7 +28,7 @@ class CommandLineInterface
     end
     
     def options
-        puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+        puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
         space_helper(2)
         puts "Welcome to Vintageflix!".cyan 
         space_helper(2)
@@ -36,7 +36,7 @@ class CommandLineInterface
         space_helper(2)  
         puts "What would you like to do? Please select a number from 1-8.".cyan   
         space_helper(2)
-        puts "(1) Create new user."
+        puts "(1) Create a new user." 
         space_helper(2)
         puts "(2) Edit user info."
         space_helper(2)
@@ -52,7 +52,7 @@ class CommandLineInterface
         space_helper(2) 
         puts "(8) Exit this program." 
         space_helper(2) 
-        puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+        puts "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
         space_helper(2) 
 
         input = gets.chomp
@@ -86,15 +86,14 @@ class CommandLineInterface
             puts "What movie are you looking for?".cyan
             average_movie_rating
         elsif input == '8' 
-            space_helper(2)
-            #puts "Goodbye!".yellow 
-            puts "   #####                                                   "
-            puts "  #     #   ####    ####   #####   #####   #   #  ######   "
-            puts "  #        #    #  #    #  #    #  #    #   # #   #        "
-            puts "  #  ####  #    #  #    #  #    #  #####     #    #####    "
-            puts "  #     #  #    #  #    #  #    #  #    #    #    #        "
-            puts "  #     #  #    #  #    #  #    #  #    #    #    #        "
-            puts "   #####    ####    ####   #####   #####     #    ######   "          
+            space_helper(2) 
+            puts "          #####                                                  ### " 
+            puts "         #     #   ####    ####   #####   #####   #   #  ######  ### " 
+            puts "         #        #    #  #    #  #    #  #    #   # #   #       ### " 
+            puts "         #  ####  #    #  #    #  #    #  #####     #    #####    #  " 
+            puts "         #     #  #    #  #    #  #    #  #    #    #    #           " 
+            puts "         #     #  #    #  #    #  #    #  #    #    #    #       ### " 
+            puts "          #####    ####    ####   #####   #####     #    ######  ### "         
             space_helper(2)   
             exit_program  
         else
@@ -105,38 +104,39 @@ class CommandLineInterface
         end 
     end
 
-    def display_movies
-        space_helper(2) 
-        movies = Movie.all.each do |movie|
-            puts "#{movie.id}: #{movie.title}: #{movie.description}: #{movie.genre}"  
-            space_helper(2)
-        end 
-        puts "Press any key to return to the homepage.".cyan
-        space_helper(2)
-        STDIN.getch 
-        options 
-    end
-
     # def display_movies
     #     space_helper(2) 
     #     movies = Movie.all.each do |movie|
     #         puts "#{movie.id}: #{movie.title}: #{movie.description}: #{movie.genre}"  
     #         space_helper(2)
-    #     end
-    #     #space_helper(2) 
-    #     puts "Press 'r' to return to the homepage.".yellow
-    #     space_helper(2)
-    #     display_movie_input = gets.chomp
-
-    #     if display_movie_input != "r"
-    #     space_helper(2) 
-    #     puts "I'm sorry please press r to return to the homepage.".yellow 
-    #     display_movies
-    #     elsif display_movie_input == "r"
-    #     space_helper(2)
-    #     options 
     #     end 
+    #     puts "Press any key to return to the homepage.".cyan
+    #     space_helper(2)
+    #     STDIN.getch 
+    #     options 
     # end
+
+    def display_movies
+        space_helper(2) 
+        movies = Movie.all.each do |movie|
+            puts "#{movie.id}. #{movie.title}- #{movie.description}. Genre: #{movie.genre}."   
+            space_helper(2)
+        end
+        puts "Please scroll up to see all the results.".cyan 
+        space_helper(2) 
+        puts "Type 'exit' to return to the homepage.".cyan 
+        space_helper(2)
+        display_movie_input = gets.chomp.downcase 
+
+        if display_movie_input != 'exit'
+        space_helper(2) 
+        puts "Command not found.".cyan 
+        display_movies
+        elsif display_movie_input == 'exit' 
+        space_helper(2)
+        options 
+        end 
+    end
 
     def add_movie
         space_helper(2)
@@ -211,8 +211,10 @@ class CommandLineInterface
                     space_helper(2) 
                     options
                 else
-                    puts "Here's it is! #{@find_movie.title}: #{@find_movie.description}: #{@find_movie.genre}".cyan 
-                    space_helper(2)  
+                    puts "Here's it is!".cyan 
+                    space_helper(2)
+                    puts "#{@find_movie.title}- #{@find_movie.description}. Genre: #{@find_movie.genre}.".cyan 
+                    space_helper(2)   
                     options 
                 end
             end
@@ -419,7 +421,7 @@ class CommandLineInterface
                 end    
                 puts "Are you sure you want to leave us? Type 'yes' or 'no' to choose.".cyan 
                     space_helper(2) 
-                    choice = gets.chomp
+                    choice = gets.chomp.downcase 
                     space_helper(2)
                     if choice != 'yes' && choice != 'no' 
                         puts "Command not found.".cyan 

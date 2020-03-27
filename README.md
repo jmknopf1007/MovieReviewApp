@@ -3,6 +3,10 @@
 For my mod 1 final project I built a Command Line movie database application.
 The movies in the database were taken from the Rotten Tomatoes website- https://www.rottentomatoes.com/top/bestofrt/top_100_classics_movies.
 
+## Demo
+
+![](VintageflixApp.gif)
+
 ## Installation 
 
 Fork the repository and then in your terminal:<br> 

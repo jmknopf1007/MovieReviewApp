@@ -13,7 +13,7 @@ ruby ~> 2.6.1<br>
 sqlite3 ~> 1.4.0<br>
 activerecord-reset-pk-sequence<br>
 bubble letters from http://www.network-science.de/ascii/<br>
-old school terminal from https://github.com/Swordfish90/cool-retro-term<br>
+old school terminal emulator from https://github.com/Swordfish90/cool-retro-term<br>
 
 ## Installation 
 

@@ -48,12 +48,12 @@ The program is built to guide you through:<br>
 
 ## Acknowledgements 
 
-- I would like to thank Devin in mod 2 for his space_helper function idea.<br>
-- I would like to thank Tiffany in mod 2 for sharing the reset-pk-sequence gem.<br>
-- I would like to thank Michael in mod 2 for showing me the cool-retro-term emulator.<br>
-- I would like to thank Sean in mod 1 for showing me how to use STDIN.getch.<br> 
-- I would like to thank Tanner in mod 1 for sharing how to create big letters with<br> ASCII text.<br>
-- I would like to thank everyone associated with mod 1 for their advice, support, and<br>
+- I want to thank Devin in mod 2 for his space_helper function idea.<br>
+- I want to thank Tiffany in mod 2 for sharing the reset-pk-sequence gem.<br>
+- I want to thank Michael in mod 2 for showing me the cool-retro-term emulator.<br>
+- I want to thank Sean in mod 1 for showing me how to use STDIN.getch.<br> 
+- I want to thank Tanner in mod 1 for sharing how to create big letters with<br> ASCII text.<br>
+- I want to thank everyone associated with mod 1 for their advice, support, and<br>
 encouragement throughout this creation process.<br> 
 
 

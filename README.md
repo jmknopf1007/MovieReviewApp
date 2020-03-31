@@ -1,6 +1,6 @@
 # Module One Final Project- Vintageflix 
 
-For my mod 1 final project I built a Command Line movie database application.
+For my mod 1 final project I built a Command Line movie database application.<br>
 The movies in the database were taken from the Rotten Tomatoes website-
 https://www.rottentomatoes.com/top/bestofrt/top_100_classics_movies.
 
@@ -54,7 +54,6 @@ The program is built to guide you through:<br>
 - I want to thank Michael in mod 2 for showing me the cool-retro-term emulator.<br>
 - I want to thank Sean in mod 1 for showing me how to use STDIN.getch.<br> 
 - I want to thank Tanner in mod 1 for sharing how to create big letters with<br> ASCII text.<br>
-- I want to thank everyone associated with mod 1 for their advice, support, and
-encouragement throughout this creation process.<br> 
+
 
 

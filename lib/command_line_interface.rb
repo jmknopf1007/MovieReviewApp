@@ -213,7 +213,7 @@ class CommandLineInterface
                 else
                     puts "Here's it is!".cyan 
                     space_helper(2)
-                    puts "#{@find_movie.title}- #{@find_movie.description}. Genre: #{@find_movie.genre}.".cyan 
+                    puts "#{@find_movie.title}-- #{@find_movie.description}. Genre-- #{@find_movie.genre}.".cyan 
                     space_helper(2)   
                     options 
                 end

@@ -119,7 +119,7 @@ class CommandLineInterface
     def display_movies
         space_helper(2) 
         movies = Movie.all.each do |movie|
-            puts "#{movie.id}. #{movie.title}-- #{movie.description}. Genre-- #{movie.genre}."   
+            puts "#{movie.id}. #{movie.title}-- #{movie.description}. Genre-- #{movie.genre}"   
             space_helper(2)
         end
         puts "Please scroll up to see all the results.".cyan 

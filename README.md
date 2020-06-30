@@ -1,4 +1,4 @@
-# Module One Final Project- Vintageflix 
+# Vintageflix CLI
 
 For my mod 1 final project I built a command line movie database application.<br>
 The movies in the database were taken from the Rotten Tomatoes website:

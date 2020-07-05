@@ -361,7 +361,7 @@ class CommandLineInterface
             end
         end 
                 if @find_user != nil 
-                    puts "Here is your info-- username: #{@find_user.username}, age: #{@find_user.age}.".cyan 
+                    puts "Here is your info: username-- #{@find_user.username}, age-- #{@find_user.age}.".cyan 
                     space_helper(2) 
                     puts "Please enter a new username.".cyan
                     space_helper(2) 
@@ -416,7 +416,7 @@ class CommandLineInterface
             end 
         end
                 if @find_user != nil 
-                    puts "Here is your info-- username: #{@find_user.username}, age: #{@find_user.age}.".cyan
+                    puts "Here is your info: username-- #{@find_user.username}, age-- #{@find_user.age}.".cyan
                     space_helper(2) 
                 end    
                 puts "Are you sure you want to leave us? Type 'yes' or 'no' to choose.".cyan 

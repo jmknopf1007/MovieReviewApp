@@ -324,7 +324,7 @@ class CommandLineInterface
 
         if u_info == '1'
             space_helper(2) 
-            puts "Alright let's edit.".cyan
+            puts "All right let's edit.".cyan
             edit_account 
         elsif
             u_info == '2'
@@ -416,8 +416,8 @@ class CommandLineInterface
             end 
         end
                 if @find_user != nil 
-        puts "Here is your info- username: #{@find_user.username}, age: #{@find_user.age}.".cyan
-        space_helper(2) 
+                    puts "Here is your info- username: #{@find_user.username}, age: #{@find_user.age}.".cyan
+                    space_helper(2) 
                 end    
                 puts "Are you sure you want to leave us? Type 'yes' or 'no' to choose.".cyan 
                     space_helper(2) 

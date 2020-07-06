@@ -390,7 +390,7 @@ class CommandLineInterface
                     edit_account
                 elsif response == 'yes'
                     new_profile = @find_user.update(username: new_name.titleize, age: new_age) 
-                    puts "Your new username is: #{@find_user.username}, and your new age is: #{@find_user.age}.".cyan 
+                    puts "Your new username is #{@find_user.username}, and your new age is #{@find_user.age}.".cyan 
                     space_helper(2)  
                     options 
                 end

@@ -53,7 +53,7 @@ The program is built to guide you through:<br>
 - I want to thank Tiffany in mod 2 for sharing the reset-pk-sequence gem.<br>
 - I want to thank Michael in mod 2 for showing me the cool-retro-term emulator.<br>
 - I want to thank Sean in mod 1 for showing me how to use STDIN.getch.<br> 
-- I want to thank Tanner in mod 1 for sharing how to create bubble letters with<br> ASCII text.
+- I want to thank Tanner in mod 1 for sharing how to make buble letters with ASCII text.
 
 
 
